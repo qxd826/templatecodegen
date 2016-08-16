@@ -1,0 +1,73 @@
+<%@ include file="/common/taglibs.jsp"%>
+<%@ page language="java" pageEncoding="UTF-8"%>  
+
+    <head>
+        <script type="text/javascript" src="<csrf:url value='/scripts/ckeditor/ckeditor.js'/>"></script>        
+        <meta name="topWizardBar" content=""></meta>
+        <meta name="topTabBar"    content=""></meta>
+        <script type="text/javascript" src="<csrf:url value='/scripts/jqTableWidget/js/My97DatePicker/WdatePicker.js'/>"></script>
+    </head>
+
+	<form:form action="${ctx}/${FMT.xyzabc($table)}/${FMT.XyzAbc($table)}" commandName="${FMT.xyzabc($table)}" name="${FMT.xyzabc($table)}" id="${FMT.xyzabc($table)}" method="post" onsubmit="return onFormSubmit(this)">
+		
+		<form:hidden path="id" />
+		<form:hidden path="gmtCreate"/>
+		<form:hidden path="creator"/>
+		<form:hidden path="isDeleted" />
+		
+        <div class="tqmc-from">
+	        #foreach($item in $values)
+	    	#if(${item.name} != 'id' && ${FMT.XYZ_ABC(${item.name})} != 'CREATOR' && ${FMT.XYZ_ABC(${item.name})} != 'GMT_CREATE' && ${FMT.XYZ_ABC(${item.name})} != 'IS_DELETED')
+	    	#if(${item.vmSign} == 'input')
+			<div class="control-group">
+				<alibaba:label styleClass="desc-info" key="aone.${FMT.xyzabc($table)}.${FMT.xyzAbc(${item.name})}" colon="true" />
+				<div class="controls">
+			    	#if(${item.nullable} == 'false')<b class="red">*</b>#end
+			    	<form:input path="${FMT.xyzAbc(${item.name})}" cssClass="width-470" cssErrorClass="text middle error"/>
+					<form:errors path="${FMT.xyzAbc(${item.name})}" cssClass="fieldError"/>   
+			    </div>
+			</div>
+	        #elseif(${item.vmSign} == 'dropdown')
+	        <div class="control-group">
+		    	<alibaba:label styleClass="desc-info" key="aone.${FMT.xyzabc($table)}.${FMT.xyzAbc(${item.name})}" colon="true" />
+		    	#if(${item.nullable} == 'false')<b class="red">*</b>#end
+		    	<div class="control">
+		    		<cache:ao.res.select group="${FMT.xyzabc($table)}.${FMT.xyzAbc(${item.name})}" styleClass="" name="${FMT.xyzAbc(${item.name})}" value="${${FMT.xyzabc($table)}.${FMT.xyzAbc(${item.name})}}" id="${FMT.xyzAbc(${item.name})}"/>
+		    	</div>
+	    	</div>
+	    	#elseif(${item.vmSign} == 'textarea')
+	    	<div class="control-group">
+		    	<alibaba:label styleClass="desc-info" key="aone.${FMT.xyzabc($table)}.${FMT.xyzAbc(${item.name})}" colon="true" />
+		    	#if(${item.nullable} == 'false')<b class="red">*</b>#end
+		    	<div class="control">
+		      		<form:errors path="${FMT.xyzAbc(${item.name})}" cssClass="fieldError"/> 
+		            <form:textarea  cols="10" path="${FMT.xyzAbc(${item.name})}"/>   
+		    	</div>
+	    	</div>
+			#elseif(${item.vmSign} == 'date')
+		    <div class="control-group">
+			    <alibaba:label styleClass="desc-info" key="aone.${FMT.xyzabc($table)}.${FMT.xyzAbc(${item.name})}" colon="true" />
+			    #if(${item.nullable} == 'false')<b class="red">*</b>#end
+			    <div class="control">
+			    	<form:input path="${FMT.xyzAbc(${item.name})}" onClick="WdatePicker()" cssClass="text middle" cssErrorClass="text middle error"/>
+		        	<form:errors path="${FMT.xyzAbc(${item.name})}" cssClass="fieldError"/>
+			    </div>
+		    </div>
+		    #elseif(${item.vmSign} == 'checkbox')
+			<div class="control-group">
+			    <alibaba:label styleClass="desc-info" key="aone.${FMT.xyzabc($table)}.${FMT.xyzAbc(${item.name})}" colon="true" />
+			    #if(${item.nullable} == 'false')<b class="red">*</b>#end
+			    <div class="control">
+					<span>
+						<form:checkbox path="${FMT.xyzAbc(${item.name})}" />
+                		<form:errors path="${FMT.xyzAbc(${item.name})}" cssClass="fieldError"/>       
+					</span>
+				</div>
+		    </div>
+	        #end#end#end
+	        <div class="modal-footer">
+	            <input class="btn btn-primary" name="new" type="submit" value="保存">
+	        </div>
+	    </div>
+    </form:form> 
+

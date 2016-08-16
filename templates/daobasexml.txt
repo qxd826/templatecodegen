@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tqmall.crm.mapper.${FMT.XyzAbc($table)}Mapper">
+
+  <resultMap id="${FMT.XYZ_ABC($table)}" type="com.tqmall.crm.model.${FMT.XyzAbc($table)}">
+	<id property="id" column="id" />
+	#foreach($item  in $values)#if($velocityCount != 1)<result property="${FMT.xyzAbc(${item.name})}" column="${FMT.XYZ_ABC(${item.name})}"/>
+    #end#end
+  </resultMap>
+
+  <select id="get${FMT.XyzAbc($table)}" resultMap="${FMT.XYZ_ABC($table)}" parameterType="long">
+    select 
+    #foreach($item in $values)${FMT.XYZ_ABC(${item.name})}#if($velocityCount != $values.size()), 
+    #end#end
+    
+    FROM ${FMT.XYZ_ABC(${realTable})}
+    WHERE id = #{value}
+  </select>
+  
+  <insert id="insert${FMT.XyzAbc($table)}" parameterType="${FMT.XyzAbc($table)}" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO ${FMT.XYZ_ABC(${realTable})}(
+    #foreach($item in $values)#if($velocityCount != 1)${FMT.XYZ_ABC(${item.name})}#if($velocityCount != $values.size()), 
+    #end#end#end)
+    
+    VALUES(
+    #foreach($item in $values)#if($velocityCount != 1)#{${FMT.xyzAbc(${item.name})}}#if($velocityCount != $values.size()),
+    #end#end#end)
+    <selectKey resultType="long" keyProperty="id">
+        SELECT LAST_INSERT_ID()
+    </selectKey> 
+  </insert>  
+  
+  <delete id="delete${FMT.XyzAbc($table)}" parameterType="${FMT.XyzAbc($table)}" >
+      UPDATE ${FMT.XYZ_ABC(${realTable})} SET IS_DELETED='Y',GMT_MODIFIED=#{gmtModified},MODIFIER=#{modifier} WHERE ID = #{id}
+  </delete>
+  
+  <update id="update${FMT.XyzAbc($table)}" parameterType="${FMT.XyzAbc($table)}">
+    UPDATE ${FMT.XYZ_ABC(${realTable})} set
+    #foreach($item in $values)#if($velocityCount != 1 && ${FMT.XYZ_ABC(${item.name})} != 'CREATOR' && ${FMT.XYZ_ABC(${item.name})} != 'GMT_CREATE')${FMT.XYZ_ABC(${item.name})} = #{${FMT.xyzAbc(${item.name})}}#if($velocityCount != $values.size()), 
+    #end#end#end
+
+    where id = #{id}
+  </update>
+
+</mapper>

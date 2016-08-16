@@ -1,0 +1,103 @@
+<%@ include file="/common/taglibs.jsp"%>
+<%@ page language="java" pageEncoding="UTF-8"%>  
+
+<div><h1>${FMT.XyzAbc($table)}管理</h1></div>
+<div>
+
+<div class="operate_btn cc">
+    <ul class="cc">
+        <a data-toggle="modal" class="btn btn-success" href="#myModal_new${FMT.XyzAbc($table)}">添加${FMT.XyzAbc($table)}</a>
+    </ul>
+</div>
+<div class="ao_search">
+<input name="name" type="text" class="input-xlarge" />
+<input class="ao-btn btn-primary" type="submit" value="搜索">
+</div>
+<table class="ao-table">
+<thead>
+    <tr style="border-width:1">
+    #foreach($item in $values)
+        <th>${item.comment}</th>
+    #end
+        <th></th>
+    </tr>
+    </thead>
+	<c:forEach var="${FMT.xyzAbc($table)}" items="${${FMT.xyzAbc($table)}s}">
+	    <tr style="border-width:1">
+	#foreach($item in $values)
+	        <td>${${FMT.xyzAbc($table)}.${FMT.xyzAbc(${item.name})}}</td>
+	#end
+	        <td><a href="<csrf:url value='/${FMT.xyzAbc($table)}/delete${FMT.XyzAbc($table)}/${${FMT.xyzAbc($table)}.id}'/>" onclick="return confirm('确定删除此${FMT.XyzAbc($table)}?');" >Del</a>
+	            &nbsp;&nbsp; <a href="<csrf:url value='/${FMT.xyzAbc($table)}/show${FMT.XyzAbc($table)}/${${FMT.xyzAbc($table)}.id}'/>">Update</a>
+	        </td>
+	    </tr>
+	</c:forEach>
+</table>
+
+</div>
+
+<div id="myModal_new${FMT.XyzAbc($table)}" class="modal hide fade in" style="display: none; ">
+    <form action="<csrf:url value='/${FMT.xyzabc($table)}/save${FMT.XyzAbc($table)}'/>" class="form-horizontal" name="${FMT.xyzabc($table)}" id="${FMT.xyzabc($table)}-new-form" method="post">
+        <input id="id" name="id" type="hidden" value="$!{${FMT.xyzAbc($table)}.id}" class="text large">
+		
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>${FMT.XyzAbc($table)}信息</h3>
+        </div>
+		<div class="ao-from ao-from-small">
+	        #foreach($item in $values)
+	    	#if(${item.name} != 'id')
+	    	#if(${item.vmSign} == 'input')
+			<div class="ao-form-element">
+			    <label for="${FMT.xyzAbc(${item.name})}">${item.comment}：</label>
+			    <div class="control">
+			    <input name="${FMT.xyzAbc(${item.name})}" type="text" class="input-xlarge"/>
+			    </div>
+			</div>
+	        #elseif(${item.vmSign} == 'dropdown')
+	        <div class="ao-form-element">
+		      <label for="${FMT.xyzAbc(${item.name})}">${item.comment}：</label>
+		      <div class="control">
+		      <select name="${FMT.xyzAbc(${item.name})}">
+		          <option value="${${FMT.xyzAbc($table)}.${FMT.xyzAbc(${item.name})}}">${${FMT.xyzAbc($table)}.${FMT.xyzAbc(${item.name})}}</option>
+		      </select>
+		      </div>
+	    	</div>
+	    	#elseif(${item.vmSign} == 'textarea')
+	    	<div class="ao-form-element">
+		      <label for="${FMT.xyzAbc(${item.name})}">${item.comment}：</label>
+		      <div class="control">
+		        <textarea name="${FMT.xyzAbc(${item.name})}"  class="xheditor {width:'400px',height:'180px'}"></textarea>
+		      </div>
+	    	</div>
+			#elseif(${item.vmSign} == 'date')
+		    <div class="ao-form-element">
+			    <label for="${FMT.xyzAbc(${item.name})}">${item.comment}：</label>
+			    <div class="control">
+			    <input name="${FMT.xyzAbc(${item.name})}" type="text" class="input-xlarge" onclick="WdatePicker()" />
+			    </div>
+		    </div>
+		    #elseif(${item.vmSign} == 'checkbox')
+			<div class="ao-form-element">
+			    <label for="${FMT.xyzAbc(${item.name})}">${item.comment}：</label>
+			    <div class="control"><span>
+			    <input name="" type="checkbox" value="true" />
+			    </span> </div>
+		    </div>
+	        #end#end#end
+	        <div class="modal-footer">
+	            <input class="btn btn-primary" name="new" type="submit" value="保存">
+	        </div>
+        </div>
+    </form> 
+</div>
+
+<script type="text/javascript"> 
+       CKEDITOR.replace('description', {
+		skin : 'kama',   //'kama', 'v2', 'office2003'
+		height : 160,
+		width : 600
+	}); 
+</script> 
+
+

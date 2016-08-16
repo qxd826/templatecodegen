@@ -1,0 +1,14 @@
+package com.tqmall.crm.service.${FMT.xyzabc($table)};
+
+import com.tqmall.crm.service.BaseService;
+
+import javax.jws.WebService;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
+@WebService
+@Path("/${FMT.XyzAbc($table)}Service")
+@Produces({"application/json", "application/xml"})
+public interface ${FMT.XyzAbc($table)}Service extends BaseService {
+    
+}

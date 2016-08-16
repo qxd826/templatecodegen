@@ -1,0 +1,40 @@
+package com.hive.webapp.controller.${FMT.xyzabc($table)};
+
+@Controller 
+public class ${FMT.XyzAbc($table)}Controller extends BaseFormController {
+
+    @Autowired
+    private ${FMT.XyzAbc($table)}Manager ${FMT.xyzAbc($table)}Manager;
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/${FMT.xyzAbc($table)}/show${FMT.XyzAbc($table)}/{id}")
+    public ModelAndView show${FMT.XyzAbc($table)}Form(@PathVariable long id) throws Exception {
+        ModelAndView mv = new ModelAndView("/${FMT.xyzabc($table)}/${FMT.xyzAbc($table)}Form");
+        mv.addObject("${FMT.xyzAbc($table)}", this.${FMT.xyzAbc($table)}Manager.get${FMT.XyzAbc($table)}(id));
+        return mv;
+    }    
+    
+    @RequestMapping(method = RequestMethod.POST,value = "/${FMT.xyzAbc($table)}/save${FMT.XyzAbc($table)}")
+    public String save${FMT.XyzAbc($table)}(${FMT.XyzAbc($table)} ${FMT.xyzAbc($table)}, BindingResult errors, HttpServletRequest request,
+            HttpServletResponse response)throws Exception {
+        if(${FMT.xyzAbc($table)}.getId()==null){
+            ${FMT.xyzAbc($table)}Manager.insert${FMT.XyzAbc($table)}(${FMT.xyzAbc($table)});
+        }else{
+            ${FMT.xyzAbc($table)}Manager.update${FMT.XyzAbc($table)}(${FMT.xyzAbc($table)});
+        }
+        return "redirect:/${FMT.xyzabc($table)}";
+    }
+    
+    @RequestMapping(method = {RequestMethod.POST,RequestMethod.GET},value = "/${FMT.xyzabc($table)}/delete${FMT.XyzAbc($table)}/{id}")
+    public String delete${FMT.XyzAbc($table)}(@PathVariable long id)throws Exception {
+        ${FMT.xyzAbc($table)}Manager.delete${FMT.XyzAbc($table)}(id);
+        return "redirect:/${FMT.xyzabc($table)}";
+    }        
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/${FMT.xyzabc($table)}")
+    public ModelAndView show${FMT.XyzAbc($table)}() throws Exception {
+        ModelAndView mv = new ModelAndView("/${FMT.xyzabc($table)}/${FMT.xyzAbc($table)}List");
+        mv.addObject("${FMT.xyzAbc($table)}s", this.${FMT.xyzAbc($table)}Manager.get${FMT.XyzAbc($table)}s());
+        mv.addObject("${FMT.xyzAbc($table)}", new ${FMT.XyzAbc($table)}());
+        return mv;
+    }      
+}

@@ -1,0 +1,8 @@
+* 以空格分隔的列，多个空格当是一个
+* 去掉第4列和最后一列， 
+* 外循环cols实际上是行
+* 最后一个end前的空行起换行作用
+#foreach($item  in $cols)#foreach($col in $item)#if($velocityCount != 8 && $velocityCount != $cols.size() ) --${FMT.xyzAbc(${col})}#end
+#end
+
+#end

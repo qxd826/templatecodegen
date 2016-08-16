@@ -1,0 +1,52 @@
+
+package com.tqmall.crm.service.${FMT.xyzabc($table)}.impl;
+
+import com.tqmall.crm.service.${FMT.XyzAbc($table)}Manager;
+import java.util.List;
+import javax.jws.WebService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service("${FMT.xyzAbc($table)}Manager")
+public class ${FMT.XyzAbc($table)}ManagerImpl implements ${FMT.XyzAbc($table)}Manager, ${FMT.XyzAbc($table)}Service {
+    
+    @Autowired
+    private ${FMT.XyzAbc($table)}Dao ${FMT.xyzAbc($table)}Dao;
+            
+    @Override
+    public ${FMT.XyzAbc($table)} get${FMT.XyzAbc($table)}(Long id) {
+        return ${FMT.xyzAbc($table)}Dao.get${FMT.XyzAbc($table)}(id);
+    }
+
+    @Transactional
+    public void insert${FMT.XyzAbc($table)}(${FMT.XyzAbc($table)} ${FMT.xyzAbc($table)}) {
+        ${FMT.xyzAbc($table)}Dao.insert${FMT.XyzAbc($table)}(${FMT.xyzAbc($table)});
+    }
+
+    @Override
+    public void delete${FMT.XyzAbc($table)}(${FMT.XyzAbc($table)} ${FMT.xyzAbc($table)}) {
+        ${FMT.xyzAbc($table)}Dao.delete${FMT.XyzAbc($table)}(${FMT.xyzAbc($table)});
+    }
+
+    @Override
+    public List<${FMT.XyzAbc($table)}> get${FMT.XyzAbc($table)}s() {
+        return ${FMT.xyzAbc($table)}Dao.get${FMT.XyzAbc($table)}s();
+    }
+
+    @Override
+    public void update${FMT.XyzAbc($table)}(${FMT.XyzAbc($table)} ${FMT.xyzAbc($table)}) {
+        ${FMT.xyzAbc($table)}Dao.update${FMT.XyzAbc($table)}(${FMT.xyzAbc($table)});
+    }
+
+    @Override
+    public String getServiceHelpText() {
+        return "";
+    }
+
+    @Override
+    public String getServiceName() {
+        return "";
+    }
+    
+}

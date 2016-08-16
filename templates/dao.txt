@@ -1,0 +1,16 @@
+package com.hive.dal.dao.mybatis.${FMT.xyzabc($table)};
+
+import java.util.List;
+
+public interface ${FMT.XyzAbc($table)}Dao {
+
+  ${FMT.XyzAbc($table)} get${FMT.XyzAbc($table)}(Long id);
+  
+  void insert${FMT.XyzAbc($table)}(${FMT.XyzAbc($table)} ${FMT.xyzAbc($table)});
+  
+  void delete${FMT.XyzAbc($table)}(AoneObjectDeleted objectDeleted);
+  
+  void update${FMT.XyzAbc($table)}(${FMT.XyzAbc($table)} ${FMT.xyzAbc($table)});
+    
+  List<${FMT.XyzAbc($table)}> get${FMT.XyzAbc($table)}s();  
+}

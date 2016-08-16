@@ -1,0 +1,22 @@
+package com.tqmall.crm.common.model.${FMT.xyzabc($table)};
+
+import java.io.Serializable;
+
+public class ${FMT.XyzAbc($table)} implements Serializable {
+
+#foreach($item in $values)
+    private ${item.type} ${FMT.xyzAbc(${item.name})};
+#end
+
+
+#foreach($item in $values)
+    public ${item.type}#if(${item.type}=='Boolean') is#else get#end${FMT.XyzAbc(${item.name})}() {
+        return ${FMT.xyzAbc(${item.name})};
+    }
+
+    public void set${FMT.XyzAbc(${item.name})}(${item.type} ${FMT.xyzAbc(${item.name})}) {
+        this.${FMT.xyzAbc(${item.name})} = ${FMT.xyzAbc(${item.name})};
+    }
+    
+#end
+}
