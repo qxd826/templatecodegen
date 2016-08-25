@@ -49,6 +49,7 @@ public class GenEngine {
     pp.setProperty("file.resource.loader.path", templateBaseDir);
     pp.setProperty(VelocityEngine.RUNTIME_LOG, targetDir + File.separator + "velocity.log");
     String velocityProperties = "velocity.properties";
+
     File f = new File(velocityProperties);
     if (f.exists()) {
       log.info("init with file:" + velocityProperties);
