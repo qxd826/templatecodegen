@@ -361,6 +361,7 @@ public class GenEngine {
 
   static Map<String, String> FIELD_TYPE_2_JAVA = new HashMap<String, String>();
   static {
+    FIELD_TYPE_2_JAVA.put("bigint", "Long");
     FIELD_TYPE_2_JAVA.put("int(11)", "Long");
     FIELD_TYPE_2_JAVA.put("int(10)", "Long");
     FIELD_TYPE_2_JAVA.put("char", "String");

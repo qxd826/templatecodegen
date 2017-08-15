@@ -68,7 +68,6 @@ public class Tcg extends org.eclipse.swt.widgets.Composite {
      * Auto-generated main method to display this org.eclipse.swt.widgets.Composite inside a new Shell.
      */
     public static void main(String[] args) {
-        System.out.println("wwww");
         showGUI();
     }
 
