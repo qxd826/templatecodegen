@@ -367,6 +367,7 @@ public class GenEngine {
     FIELD_TYPE_2_JAVA.put("char", "String");
     FIELD_TYPE_2_JAVA.put("varchar", "String");
     FIELD_TYPE_2_JAVA.put("text", "String");
+    FIELD_TYPE_2_JAVA.put("longtext", "String");
     FIELD_TYPE_2_JAVA.put("date", "Date");
     FIELD_TYPE_2_JAVA.put("datetime", "Date");
     FIELD_TYPE_2_JAVA.put("decimal", "BigDecimal");
