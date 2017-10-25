@@ -54,8 +54,6 @@
         <include refid="BaseColumnList"/>
         from ${table}
         <include refid="BaseWhereClause"/>
-        <include refid="COMMON.ORDER_BY"/>
-        <include refid="COMMON.LIMIT"/>
     </select>
 
     <!-- 根据ID查询 -->
