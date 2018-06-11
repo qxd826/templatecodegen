@@ -4,7 +4,8 @@ import lombok.Data;
 public class ${FMT.XyzAbc($table)} {
 
     #foreach($item in $values)
-private ${item.type} ${FMT.xyzAbc(${item.name})};//${item.comment}
+/**${item.comment}*/
+private ${item.type} ${FMT.xyzAbc(${item.name})};
     #end
     }
 

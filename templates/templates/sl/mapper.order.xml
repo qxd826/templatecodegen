@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${FMT.XyzAbc($table)}Dao">
+<mapper namespace="${FMT.XyzAbc($table)}Mapper">
 
     <resultMap id="BaseResultMap" type="${FMT.XyzAbc($table)}">
         #foreach($item in $values)
+        #if($velocityCount == 1)
+        <id column="${item.name}" property="${FMT.xyzAbc(${item.name})}"/>
+        #else
         <result column="${item.name}" property="${FMT.xyzAbc(${item.name})}"/>
+        #end
         #end
     </resultMap>
 
@@ -43,7 +47,7 @@
 
     <!-- 查询总数 -->
     <select id="selectCount" resultType="java.lang.Integer">
-        select count(id)
+        select count(${values[0].name})
         from ${table}
         <include refid="BaseWhereClause"/>
     </select>
@@ -61,7 +65,7 @@
         select
         <include refid="BaseColumnList"/>
         from ${table}
-        where id = #{id}
+        where ${values[0].name} = #{${FMT.xyzAbc(${values[0].name})}}
     </select>
 
     <!-- 根据IDS批量查询 -->
@@ -69,7 +73,7 @@
         select
         <include refid="BaseColumnList"/>
         from ${table}
-        where id in
+        where ${values[0].name} in
         (
         <foreach collection="array" index="index" item="tag" separator=",">
             #{tag}
@@ -78,34 +82,15 @@
     </select>
 
 
-    <!-- 根据IDS批量删除 -->
-    <update id="deleteByIds">
-        update ${table}
-        set is_deleted='Y' , gmt_modified = now()
-        where id in
-        (
-        <foreach collection="array" index="index" item="tag" separator=",">
-            #{tag}
-        </foreach>
-        )
-    </update>
-
-    <!-- 根据ID删除 -->
-    <update id="deleteById">
-        update legend_${table}
-        set is_deleted='Y' , gmt_modified = now()
-        where id=#{id}
-    </update>
-
     <!-- 删除 -->
     <delete id="delete">
         update ${table}
-        set is_deleted='Y' , gmt_modified = now()
+        set invalid= 1
         <include refid="BaseWhereClause"/>
     </delete>
 
     <!-- 添加   -->
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="${FMT.xyzAbc(${values[0].name})}">
         insert into ${table} (
         <trim suffix="" suffixOverrides=",">
             #foreach($item in $values)
@@ -130,14 +115,16 @@
     <update id="updateById">
         update ${table}
         <include refid="BaseUpdateSet"/>
-        where id = #{id}
+        where ${values[0].name} = #{${FMT.xyzAbc(${values[0].name})}}
     </update>
 
     <insert id="batchInsert" parameterType="java.util.List">
         insert into ${table} (
         <trim suffix="" suffixOverrides=",">
             #foreach($item in $values)
-            ${item.name},
+            <if test="${FMT.xyzAbc(${item.name})} != null">
+                ${item.name},
+            </if>
             #end
         </trim>
         )
